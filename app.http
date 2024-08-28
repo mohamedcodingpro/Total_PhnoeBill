@@ -1,0 +1,54 @@
+GET http://localhost:4011/api/price_plans/
+
+
+###
+POST http://localhost:4011/api/price_plan/create
+Content-Type: application/json
+
+{
+    "plan_name": "Moha",
+    "sms_price": 1.4,
+    "call_price": 3.2
+}
+
+
+###
+POST http://localhost:4011/api/price_plan/update
+Content-Type: application/json
+
+{
+    "plan_name": "Ali",
+    "sms_price": 1.4,
+    "call_price": 3.2,
+    "id": 4
+}
+
+
+###
+POST http://localhost:4011/api/price_plan/delete
+Content-Type: application/json
+
+{
+    "id": 11
+}
+
+###
+
+POST  http://localhost:4011/api/phonebill
+Content-Type: application/json
+
+{
+    "price_name": "sms 101",
+    "actions": "call, sms, call"
+}
+
+
+
+###
+POST  http://localhost:4011/api/phonebll
+Content-Type: application/json
+
+{
+    "price_name": "sms 101",
+    "sms_"
+}

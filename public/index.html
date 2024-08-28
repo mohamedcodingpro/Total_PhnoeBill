@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total_phone_bill</title>
+    <script src="./totalBills.js" defer></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body x-data="PhoneBill" class="p-3 mb-2 bg-dark-subtle text-emphasis-dark">
+    <div>
+        <div class="text-center">
+            <div class="card-body">
+                <h3 class="card-title">Total Phone Bill</h3>
+                <div>
+                    <span>Plan name: </span><span x-text="plan_name"></span><br>
+                    <span>SMS: </span><span x-text="sms_price"></span><br>
+                    <span>CALL: </span><span x-text="call_price"></span>
+                </div>
+                
+                <label>Plan name: </label>
+                <input type="text" x-model="user_plan_name" placeholder="enter plan name " /><br>
+                
+                <label>SMS Price </label>
+                <input type="number" x-model="user_sms_price" placeholder="enter a price" /><br>
+
+                <label>CALL Price</label>
+                <input type="number" x-model="user_call_price" placeholder="enter a price" /><br>
+                <input type="number" x-model="ed_id" x-show="hideForever" />
+                <button
+                    @click="(addPlan), (plan_name = user_plan_name), (sms_price =user_sms_price), (call_price = user_call_price)"
+                    x-show="!hide">Add Plan</button>
+                <button @click="(updatePlan(ed_id)), (hide=!hide) " x-show="hide">done</button>
+            </div>
+            <hr>
+
+            <table class="table table-dark table-bordered">
+                <thead>
+                    <tr>
+                        <th>PLAN</th>
+                        <th>SMS</th>
+                        <th>CALL</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template x-for="x in plans">
+                        <tr>
+                            <td x-text="x.plan_name"></td>
+                            <td x-text="x.sms_price"></td>
+                            <td x-text="x.call_price"></td>
+                            <td>
+                                <button class="btn btn-secondary"
+                                    @click="(user_plan_name=x.plan_name),(user_sms_price=x.sms_price), (user_call_price = x.call_price),(ed_id=x.id),(hide=true)">
+                                    edit
+                                </button>
+                                <button class="btn btn-info" x-on:click="deletePlan(x.id)">
+                                    delete
+                                </button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+
+            <div class="text-center">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Total Phone Bill</h3>
+                        <div>
+                            <span>Bill: </span><span x-text="total"></span><br>
+                        </div>
+                        <input type="text" x-model="selectedName" placeholder="enter a bill..." /><br>
+                        <input type="text" x-model="actions" placeholder="enter a bill..." /><br>
+                        <button x-show="hidePlan" @click="(phoneBill), (phonebill=enteredBill), (setTimeout(() => {
+                        billTotal='';
+                                enteredBill= '';
+                              }, 3000))">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="row">
+                <div class="col m8 l12 s12" style="text-align: center;">
+                    © 2024 Copyright Reserved<br>
+                    <a class="grey-text text-lighten-4 center" href="#!">Mohamed Amin&nbsp;&nbsp;
+                        <strong>Tel:</strong> +27784565757&nbsp;&nbsp; <strong>Email:</strong>
+                        mohaminali100@gmail.com</a><br>
+                    <a class="grey-text text-lighten-4 right" href="#!">UJ & ACCENTURE WORK READINESS PROGRAM</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.3/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+
+</html>
